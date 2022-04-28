@@ -23,12 +23,14 @@ A. 가능하다. Servlet의 생명주기는 Servlet Container가 관리하기 �
 > 그 과정에서 여러 Servlet들이 관리가되어진다.  
 
 ## Spring 과 Servlet은 무슨 관계인가?
-> Spring 은 Servlet Container 위에서 동작하게 되는 Application 으로, 필요에 의한 여러 Servlet들을 생성하고 Bean 으로 등록한다.  
+> Spring에서 사용자 요청을 손쉽게 처리하기 위해, mapping 하기 위해 DispatcherServlet을 활용한다.
+> Spring이 없다해서 Servlet만으로도 WAS는 동작할 수 있습니다. 단지 각 요청에 대해, 각 url 에 대해 Servlet 을 구현해줘야하는 복잡성이 생기게 된다.  
+> 즉, Spring 은 Servlet을 효율적으로 활용하는 하나의 매커니즘이라고 볼 수 있다.  
 
 ## Spring Container와 Servlet Container는 무슨 차이가 있나?
 > Spring Container는 Bean instance 들을 대상으로 DI와 IoC작업이 수행되며 관리 작업을 수행하고,  
 > Servlet Container는 Servlet instance 들을 대상으로 생명주기를 관리한다.  
-> 명확히는 둘을 직접비교하기에는 Servlet Container의 범위가 더 넓다고 판단되며, 둘은 instance들을 관리한다는 공통적인 역할을 수행하지만,
+> 명확히는 둘을 직접비교하기에는 Servlet Container의 범위가 더 넓다고 판단되며, 둘은 instance들을 관리한다는 공통적인 역할을 수행하지만,  
 > 실제 관리되어지는 대상과 수행되어지는 작업에있어서는 차이가 존재한다.  
 
 ## Spring 에서 사용자의 요청과 Servlet에서의 처리과정은 ?
