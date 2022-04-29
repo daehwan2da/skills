@@ -47,6 +47,6 @@
 ## java 에서 thread 간 데이터를 공유하는 방법은?
 > 같은 process 내의 여러 thread 간에 효과적인 데이터 공유 방법은 메모리를 공유하는 것이다.  
 > 특히 JVM 에서는 Heap, Methode 영역이 쓰레드 간 공유되며, Java 에서는 static 변수 혹은 싱글톤 인스턴스를 통해 공유가 가능하며,  
-> 이때 thread safe 를 보장하기 위해 synchronized block 과 volatile을 활용하거나, atomic 클래스들을 활용한다.  
+> 이때 thread safe 를 보장하기 위해 synchronized block 과 volatile을 활용하거나, atomic 클래스들을 활용한다.  또한 불변상태의 데이터로 초기부터 설정하여 변경을 차단하는 방법도 있다.
 
 
