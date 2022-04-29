@@ -42,3 +42,17 @@ A. 가능하다. Servlet의 생명주기는 Servlet Container가 관리하기 �
 > Client의 요청이 수신되면 locale을 비롯한 여러 전처리 작업을 거친후 HandlerMapping 작업이 수행된다. 이때부터 개발자가 등록한 Controller Bean에  
 > 어떤 path 로 갈지 정해지게 되며, 해당 Controller로 요청을 전가하게된다. 이과정에서 interceptor를 가는 과정에서 한번, 오는 과정에서 한번씩 거치게 되고, 
 > 처리된 작업은 ViewResolver 혹은 HttpMessageConveter를 바탕으로 response 가 처리되어지고, dispatcherServlet을 빠져나가게된다.
+
+## tomcat과 netty의 차이는 무엇인가?
+> 가장 큰 차이는 Servlet Based 매커니즘의 차이일것이다.  
+> tomcat 은 Servlet Based로, Servlet container 의 구현체로써의 역할을 수행한다. 따라서 Servlet에 의존적이며,  
+> 특히 한 요청당 하나의 thread를 할당하는 방식이 적용되었다.  
+> netty 는 이런 Servlet based 에서 벗어나 servlet free 한 모습을 보인다. 따라서 Servlet에 의존적이지 않으며,  
+> event-driven 형식으로 하나의 event를 받는 thread와 다수의 worker thread로 구성되어 비동기적인 처리를 수행한다.  
+
+### 그럼 tomcat 으로는 비동기 처리가 안되나?
+> 그렇지 않다. Servlet 3.0 부터는 비동기 처리를 지원하는 API 들이 등장하였어서, 이후의 버전에 대해서는 비동기 처리를 수행할 수 있다.  
+> 하지만 한 요청당 하나의 thread를 할당하는 방식은 유지되어, 이는 성능상 문제가 될 수 있다.
+
+### 어떤 성능상 문제가 발생하는가?
+> 동시 요청이 많아 thread pool 의 thread 가 모두 할당되면, 이후 사용자들에 대해서는 대기 큐에서 기다리게 된다. 이런 처리는 병목을 발생시켜 latency 를 증가시킨다.  
